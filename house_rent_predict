@@ -1,0 +1,25 @@
+# Step 1: Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# Step 2: Data for house sizes (in square feet) and corresponding prices (in $1000s)
+house_sizes = np.array([600, 800, 1000, 1200, 1500, 1800]).reshape(-1, 1)  # Features
+house_prices = np.array([150, 200, 250, 300, 400, 450])  # Target
+
+# Step 3: Create and train the model
+model = LinearRegression()
+model.fit(house_sizes, house_prices)
+
+# Step 4: Predict the price of a house with 1000 square feet
+predicted_price = model.predict([[1000]])
+print(f"Predicted price for a 1000 sq. ft. house: ${predicted_price[0] * 1000:.2f}")
+
+# Step 5: Visualize the data and the prediction line
+plt.scatter(house_sizes, house_prices, color='blue', label='Actual Prices')
+plt.plot(house_sizes, model.predict(house_sizes), color='red', label='Prediction Line')
+plt.xlabel('House Size (sq. ft.)')
+plt.ylabel('House Price ($1000s)')
+plt.title('House Size vs. Price Prediction')
+plt.legend()
+plt.show()
