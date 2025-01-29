@@ -1,0 +1,13 @@
+from sklearn.mixture import GaussianMixture
+import numpy as np
+
+# Training data: Points from two clusters
+X = np.array([[1, 2], [1.1, 2.1], [4, 5], [4.1, 5.1]])
+
+# Train a GMM
+gmm = GaussianMixture(n_components=2)
+gmm.fit(X)
+
+# Generate new data points
+new_data = gmm.sample(5)  # Generate 5 new points
+print("Generated points:\n", new_data[0])
