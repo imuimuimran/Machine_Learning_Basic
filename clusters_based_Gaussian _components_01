@@ -1,0 +1,23 @@
+from sklearn.mixture import GaussianMixture
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate synthetic data: 2 clusters
+np.random.seed(42)
+cluster_1 = np.random.normal(loc=0, scale=1, size=(100, 2))
+cluster_2 = np.random.normal(loc=5, scale=1.5, size=(100, 2))
+data = np.vstack([cluster_1, cluster_2])
+
+# Fit GMM
+gmm = GaussianMixture(n_components=2, random_state=42)
+gmm.fit(data)
+
+# Predict cluster labels
+labels = gmm.predict(data)
+
+# Plot the clusters and their centers
+plt.scatter(data[:, 0], data[:, 1], c=labels, cmap='viridis', s=10)
+plt.scatter(gmm.means_[:, 0], gmm.means_[:, 1], color='red', marker='x', s=100, label='Cluster Centers')
+plt.title("GMM Clustering")
+plt.legend()
+plt.show()
