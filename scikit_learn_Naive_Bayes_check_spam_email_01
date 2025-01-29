@@ -1,0 +1,21 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Dataset: Emails and labels (spam = 1, not spam = 0)
+emails = ["free offer", "buy now", "meeting tomorrow", "free meeting"]
+labels = [1, 1, 0, 0]
+
+# Convert text data into feature vectors
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(emails)
+
+# Train a Multinomial Naive Bayes classifier
+model = MultinomialNB()
+model.fit(X, labels)
+
+# Predict for a new email
+new_email = ["free buy", "meeting", "urgent meeting"]
+new_email_vectorized = vectorizer.transform(new_email)
+prediction = model.predict(new_email_vectorized)
+
+print("Prediction (1 = Spam, 0 = Not Spam):", prediction[2])
