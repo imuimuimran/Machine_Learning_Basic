@@ -1,0 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.random.uniform(0, 1, 1000)  # Generate 1000 values from a uniform distribution
+plt.hist(data, bins=20, color='blue', alpha=0.7)
+plt.title("Uniform Distribution")
+plt.show()
