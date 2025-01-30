@@ -1,0 +1,5 @@
+from sklearn.preprocessing import StandardScaler
+data = [[1, 2], [2, 3], [4, 6]]
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(data)
+print(scaled_data)
