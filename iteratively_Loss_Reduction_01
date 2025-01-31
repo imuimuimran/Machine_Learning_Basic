@@ -1,0 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+iterations = np.arange(1, 101)
+loss = np.exp(-iterations / 10) + 0.1 * np.random.rand(100)  # Simulated loss
+
+plt.plot(iterations, loss, label="Loss over Iterations", color='blue')
+
+# Annotate iteration numbers every 5 steps
+for i in range(0, 100, 5):
+    plt.text(iterations[i], loss[i], f"Iter {iterations[i]}", fontsize=8, color="red")
+
+plt.xlabel("Iterations")
+plt.ylabel("Loss")
+plt.title("Loss Reduction Over Time")
+plt.legend()
+plt.grid()
+plt.show()
