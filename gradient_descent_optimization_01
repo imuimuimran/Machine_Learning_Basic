@@ -1,0 +1,19 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def loss_function(w):
+    return w**2  # Simple quadratic function
+
+w_values = np.linspace(-5, 5, 100)
+loss_values = loss_function(w_values)
+
+w_history = [4, 2, 1, 0.5, 0.1, 0]  # Simulated parameter updates
+loss_history = [loss_function(w) for w in w_history]
+
+plt.plot(w_values, loss_values, label="Loss Function", color='blue')
+plt.scatter(w_history, loss_history, color='red', label="Gradient Descent Steps")
+plt.xlabel("Parameter Value (w)")
+plt.ylabel("Loss")
+plt.title("Gradient Descent Optimization")
+plt.legend()
+plt.show()
