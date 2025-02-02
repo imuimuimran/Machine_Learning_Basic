@@ -1,0 +1,14 @@
+import requests
+
+# API URL
+url = "https://randomuser.me/api/"
+
+# Send GET request
+response = requests.get(url)
+
+# Check if request was successful
+if response.status_code == 200:
+    data = response.json()  # Convert response to JSON
+    print("Fetched Data:", data)
+else:
+    print("Error:", response.status_code)
