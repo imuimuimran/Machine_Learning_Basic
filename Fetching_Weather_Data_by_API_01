@@ -1,0 +1,23 @@
+import requests
+
+latitude = 23.8103  # Dhaka's latitude
+longitude = 90.4125  # Dhaka's longitude
+
+url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
+
+response = requests.get(url)
+
+if response.status_code == 200:
+    weather_data = response.json()
+    
+    temp = weather_data["current_weather"]["temperature"]
+    wind_speed = weather_data["current_weather"]["windspeed"]
+    description = "Not provided by Open-Meteo"
+
+    print(f"🌍 Weather in Dhaka:")
+    print(f"🌡 Temperature: {temp}°C")
+    print(f"💨 Wind Speed: {wind_speed} km/h")
+    print(f"🌤 Condition: {description}")
+
+else:
+    print(f"❌ Error fetching weather data. Status code: {response.status_code}")
