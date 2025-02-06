@@ -1,0 +1,47 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MultiLabelBinarizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsRestClassifier # Import OneVsRestClassifier
+from sklearn.metrics import accuracy_score
+
+# Step 1: Create a dataset (Movies with multiple genres)
+movies = np.array([
+    ["Action", "Comedy"],
+    ["Drama", "Romance"],
+    ["Action", "Thriller"],
+    ["Comedy", "Romance"],
+    ["Drama", "Thriller"],
+    ["Action", "Drama"],
+    ["Comedy", "Thriller"],
+    ["Romance", "Thriller"]
+])
+
+# Convert labels to binary format using MultiLabelBinarizer
+mlb = MultiLabelBinarizer()
+Y = mlb.fit_transform(movies)
+
+# Generate random feature data (simulating movie characteristics)
+X = np.random.rand(len(Y), 5)  # 5 features per movie
+
+# Step 2: Split the dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+# Step 3: Train a Logistic Regression model
+model = OneVsRestClassifier(LogisticRegression()) # Wrap LogisticRegression with OneVsRestClassifier
+model.fit(X_train, Y_train)
+
+# Step 4: Predict on test data
+Y_pred = model.predict(X_test)
+
+# Step 5: Evaluate accuracy (not perfect for multilabel but used for simplicity)
+accuracy = accuracy_score(Y_test, Y_pred)
+print("Accuracy:", accuracy)
+
+# Step 6: Predict genres for a new movie
+new_movie_features = np.random.rand(1, 5)  # Generate random features
+predicted_genres = model.predict(new_movie_features)
+
+# Convert back to genre labels
+predicted_labels = mlb.inverse_transform(predicted_genres)
+print("Predicted Genres for New Movie:", predicted_labels)
